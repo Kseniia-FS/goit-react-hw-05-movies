@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -30px;
+  margin-left: -30px;
+
+  list-style: none;
+}
+
+.item {
+  margin-left: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+}
+
+.item > a > img {
+  height: 430px;
+}
+
+form {
+  margin-bottom: 50px;
+}

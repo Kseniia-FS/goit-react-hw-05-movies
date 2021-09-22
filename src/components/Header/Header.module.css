@@ -1,0 +1,17 @@
+.header {
+  padding: 20px;
+  width: 100%;
+  background-color: rgb(89, 121, 151);
+}
+
+.headerItem {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 30px;
+  text-decoration: none;
+}
+
+.active {
+  color: rgb(216, 240, 6);
+}
