@@ -1,7 +1,7 @@
 import Img from "../../images/img.svg";
 import { Link, useLocation } from "react-router-dom";
 import { getOneMovieInfo } from "../../services/API";
-import s from "../views/MoviesPage/MoviesPage.module.css";
+import s from "../../views/MoviesPage/MoviesPage.module.css";
 const URL = "https://image.tmdb.org/t/p/w500";
 const MovieList = ({ movies }) => {
   const location = useLocation();
@@ -13,8 +13,7 @@ const MovieList = ({ movies }) => {
           <li key={id} className={s.item}>
             <Link
               to={{
-                ...location,
-                state: { from: location.pathname },
+                state: { from: location.pathname + location.search },
                 pathname: `/movies/${id}`,
               }}
               onClick={() => getOneMovieInfo(id)}

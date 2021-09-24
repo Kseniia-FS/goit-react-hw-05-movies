@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 
 import s from "./Reviews.module.css";
-import { getMovieReviews } from "../../../services/API";
+import { getMovieReviews } from "../../services/API";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);

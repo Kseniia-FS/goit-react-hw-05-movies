@@ -6,13 +6,16 @@ import {
   useLocation,
   useHistory,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Img from "../../../images/img.svg";
+import { useState, useEffect, lazy, Suspense } from "react";
+import Loader from "react-js-loader";
 import s from "./MovieDetailsPage.module.css";
-import Cast from "../Cast/Cast";
-import Reviews from "../Reviews/Reviews";
-import { getOneMovieInfo } from "../../../services/API";
-const URL = "https://image.tmdb.org/t/p/w500";
+// import Cast from "../../Cast/Cast";
+// import Reviews from "../../Reviews/Reviews";
+import Movie from "../../components/Movie/Movie";
+import { getOneMovieInfo } from "../../services/API";
+const Cast = lazy(() => import("../../components/Cast/Cast"));
+const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
+
 const MovieDetailsPage = () => {
   const location = useLocation();
   const history = useHistory();
@@ -35,7 +38,7 @@ const MovieDetailsPage = () => {
             ? location.state.from + location.search
             : location.state.from
         )
-      : history.goBack();
+      : history.push("/");
   };
 
   return (
@@ -44,56 +47,51 @@ const MovieDetailsPage = () => {
         Go back
       </button>
 
-      <div className={s.wrap}>
-        <img
-          src={movie.poster_path !== null ? `${URL}${movie.poster_path}` : Img}
-          alt={movie.title}
-        />
-        <div>
-          <h1>{movie.title}</h1>
-          <p className={s.title}>
-            User Score: <span>{movie.vote_average}</span>
-          </p>
-          <p className={s.title}>
-            Overview: <span>{movie.overview}</span>
-          </p>
-          <p className={s.title}>
-            Genres:
-            {movie.genres &&
-              movie.genres.map((el) => {
-                return <span key={el.id}> {el.name} </span>;
-              })}
-          </p>
-        </div>
-      </div>
+      <Movie className={s.wrap} movie={movie} />
+
       <div>
         <h2>Additional Information</h2>
 
         <NavLink
           className={s.NavLink}
           to={{
-            ...location,
+            state: {
+              from: location.state.from,
+            },
             pathname: `${url}/cast`,
           }}
         >
           Cast
         </NavLink>
-        <Route path="/movies/:id/cast">
-          <Cast />
-        </Route>
 
         <NavLink
           className={s.NavLink}
           to={{
-            ...location,
+            state: {
+              from: location.state.from,
+            },
             pathname: `${url}/reviews`,
           }}
         >
           Reviews
         </NavLink>
-        <Route path="/movies/:id/reviews">
-          <Reviews />
-        </Route>
+        <Suspense
+          fallback={
+            <Loader
+              type="bubble-top"
+              bgColor={"rgb(89, 121, 151)"}
+              title={"bubble-top"}
+              size={100}
+            />
+          }
+        >
+          <Route path="/movies/:id/cast">
+            <Cast />
+          </Route>
+          <Route path="/movies/:id/reviews">
+            <Reviews />
+          </Route>
+        </Suspense>
       </div>
     </div>
   );

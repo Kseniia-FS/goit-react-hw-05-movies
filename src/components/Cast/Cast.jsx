@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import Img from "../../../images/img.svg";
+import Img from "../../images/img.svg";
 import s from "./Cast.module.css";
-import { getMovieCast } from "../../../services/API";
+import { getMovieCast } from "../../services/API";
 const URL = "https://image.tmdb.org/t/p/w500";
 
 const Cast = () => {

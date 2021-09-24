@@ -3,8 +3,8 @@ import { useHistory, useLocation } from "react-router";
 
 import { toast } from "react-toastify";
 
-import MovieList from "../../MovieList/MovieList";
-import { searchMovies } from "../../../services/API";
+import MovieList from "../../components/MovieList/MovieList";
+import { searchMovies } from "../../services/API";
 const MoviesPage = () => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -27,7 +27,6 @@ const MoviesPage = () => {
     e.preventDefault();
     getMovies(query);
     history.push({
-      ...location,
       search: `query=${query}`,
       state: { from: location.pathname },
     });

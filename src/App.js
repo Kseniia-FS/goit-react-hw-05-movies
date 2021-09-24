@@ -8,13 +8,11 @@ import Loader from "react-js-loader";
 // import HomePage from "./components/views/HomePage/HomePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const HomePage = lazy(() => import("./components/views/HomePage/HomePage"));
+const HomePage = lazy(() => import("./views/HomePage/HomePage"));
 const Header = lazy(() => import("./components/Header/Header"));
-const MoviesPage = lazy(() =>
-  import("./components/views/MoviesPage/MoviesPage")
-);
+const MoviesPage = lazy(() => import("./views/MoviesPage/MoviesPage"));
 const MovieDetailsPage = lazy(() =>
-  import("./components/views/MovieDetailsPage/MovieDetailsPage")
+  import("./views/MovieDetailsPage/MovieDetailsPage")
 );
 
 function App() {
